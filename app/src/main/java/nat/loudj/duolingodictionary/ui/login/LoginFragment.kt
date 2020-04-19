@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import nat.loudj.duolingodictionary.R
+import nat.loudj.duolingodictionary.data.model.User
 
 class LoginFragment : Fragment() {
 
@@ -99,9 +100,9 @@ class LoginFragment : Fragment() {
     }
 
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
+    private fun updateUiWithUser(model: User) {
         val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
+        val displayName = model.userName
         // TODO : initiate successful logged in experience
         Toast.makeText(
             context,
