@@ -20,7 +20,10 @@ class HelloFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_hello, container, false)
-        view.goToLogin.setOnClickListener { findNavController().navigate(R.id.action_helloFragment_to_loginFragment) }
+        view.goToLogin.setOnClickListener {
+            val action = HelloFragmentDirections.actionHelloFragmentToLoginFragment()
+            findNavController().navigate(action)
+        }
         return view
     }
 }
