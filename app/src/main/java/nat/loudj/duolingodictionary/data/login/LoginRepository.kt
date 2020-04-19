@@ -38,4 +38,14 @@ class LoginRepository(val dataSource: LoginDataSource) {
 
         return result
     }
+
+    companion object {
+        @Volatile
+        private var instance: LoginRepository? = null
+
+        fun getInstance() =
+            instance ?: synchronized(this) {
+                instance ?: LoginRepository(dataSource = LoginDataSource()).also { instance = it }
+            }
+    }
 }

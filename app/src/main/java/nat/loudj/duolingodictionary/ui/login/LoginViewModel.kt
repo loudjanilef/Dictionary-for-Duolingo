@@ -8,10 +8,11 @@ import nat.loudj.duolingodictionary.R
 import nat.loudj.duolingodictionary.data.Result
 import nat.loudj.duolingodictionary.data.login.LoginRepository
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
+    private val loginRepository = LoginRepository.getInstance()
 
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
