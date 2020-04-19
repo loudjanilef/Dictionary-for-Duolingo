@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.fragment_hello.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -17,6 +19,8 @@ class HelloFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_hello, container, false)
+        val view = inflater.inflate(R.layout.fragment_hello, container, false)
+        view.goToLogin.setOnClickListener { findNavController().navigate(R.id.action_helloFragment_to_loginFragment) }
+        return view
     }
 }

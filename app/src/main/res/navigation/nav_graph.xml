@@ -8,5 +8,14 @@
         android:id="@+id/helloFragment"
         android:name="nat.loudj.duolingodictionary.HelloFragment"
         android:label="fragment_hello"
-        tools:layout="@layout/fragment_hello" />
+        tools:layout="@layout/fragment_hello">
+        <action
+            android:id="@+id/action_helloFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="nat.loudj.duolingodictionary.ui.login.LoginFragment"
+        android:label="activity_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>
