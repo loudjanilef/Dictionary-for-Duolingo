@@ -1,7 +1,7 @@
 package nat.loudj.duolingodictionary.data.login
 
 import nat.loudj.duolingodictionary.data.Result
-import nat.loudj.duolingodictionary.data.model.LoggedInUser
+import nat.loudj.duolingodictionary.data.model.User
 import java.io.IOException
 
 /**
@@ -9,18 +9,13 @@ import java.io.IOException
  */
 class LoginDataSource {
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+    fun login(username: String, password: String): Result<User> {
         return try {
             // TODO: handle loggedInUser authentication
-            val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
+            val fakeUser = User(username, "")
             Result.Success(fakeUser)
         } catch (e: Throwable) {
-            Result.Error(
-                IOException(
-                    "Error logging in",
-                    e
-                )
-            )
+            Result.Error(IOException("Error logging in", e))
         }
     }
 
