@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_hello.view.*
+import nat.loudj.duolingodictionary.data.login.LoginRepository
 
 /**
  * A simple [Fragment] subclass.
@@ -14,16 +15,30 @@ import kotlinx.android.synthetic.main.fragment_hello.view.*
  * create an instance of this fragment.
  */
 class HelloFragment : Fragment() {
+    private val loginRepository = LoginRepository.getInstance()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (!loginRepository.isLoggedIn) {
+            navigateToLogin()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_hello, container, false)
-        view.goToLogin.setOnClickListener {
-            val action = HelloFragmentDirections.actionHelloFragmentToLoginFragment()
-            findNavController().navigate(action)
+        view.logout.setOnClickListener {
+            loginRepository.logout()
+            navigateToLogin()
         }
         return view
+    }
+
+    private fun navigateToLogin() {
+        val action = HelloFragmentDirections.actionHelloFragmentToLoginFragment()
+        findNavController().navigate(action)
     }
 }

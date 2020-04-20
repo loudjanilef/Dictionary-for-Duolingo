@@ -17,5 +17,9 @@
         android:id="@+id/loginFragment"
         android:name="nat.loudj.duolingodictionary.ui.login.LoginFragment"
         android:label="activity_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_helloFragment"
+            app:destination="@id/helloFragment" />
+    </fragment>
 </navigation>
