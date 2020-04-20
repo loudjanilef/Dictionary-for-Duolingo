@@ -27,6 +27,7 @@ class LoginViewModel : ViewModel() {
             _loginResult.value = LoginResult(success = result.data)
         } else {
             _loginResult.value = LoginResult(error = R.string.login_failed)
+            _loginForm.value = LoginFormState(passwordError = R.string.wrong_credentials)
         }
     }
 

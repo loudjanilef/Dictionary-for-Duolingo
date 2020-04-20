@@ -1,5 +1,6 @@
 package nat.loudj.duolingodictionary.data.login
 
+import nat.loudj.duolingodictionary.PreferencesManager
 import nat.loudj.duolingodictionary.data.Result
 import nat.loudj.duolingodictionary.data.model.User
 
@@ -18,13 +19,18 @@ class LoginRepository(val dataSource: LoginDataSource) {
         get() = user != null
 
     init {
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
         user = null
+        val username = PreferencesManager.read("username")
+        val jwt = PreferencesManager.read("jwt")
+        if (username != null && jwt != null) {
+            user = User(username, jwt)
+        }
     }
 
     fun logout() {
         user = null
+        PreferencesManager.delete("username")
+        PreferencesManager.delete("jwt")
     }
 
     suspend fun login(username: String, password: String): Result<User> {
@@ -33,6 +39,8 @@ class LoginRepository(val dataSource: LoginDataSource) {
 
         if (result is Result.Success) {
             user = result.data
+            PreferencesManager.write("username", result.data.userName)
+            PreferencesManager.write("jwt", result.data.jwt)
         }
 
         return result
