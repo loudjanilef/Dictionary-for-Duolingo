@@ -25,7 +25,6 @@ class LoginRepository(val dataSource: LoginDataSource) {
 
     fun logout() {
         user = null
-        dataSource.logout()
     }
 
     suspend fun login(username: String, password: String): Result<User> {

@@ -12,18 +12,20 @@ class LoginDataSource {
 
     suspend fun login(username: String, password: String): Result<User> {
         return try {
-            val request = WebRequestsHelper.createRequest("google.com", "")
+            val request = WebRequestsHelper.createRequest(
+                "login",
+                Pair("login", username), Pair("password", password)
+            )
             val response = WebRequestsHelper.execute(request)
+            if (!response.isSuccessful)
+                throw Error("Invalid credentials")
 
-            val fakeUser = User(username, "")
+            val fakeUser = User(username, response.headers["jwt"] ?: throw Error("No token issued"))
+            response.close()
             Result.Success(fakeUser)
         } catch (e: Throwable) {
             Result.Error(IOException("Error logging in", e))
         }
-    }
-
-    fun logout() {
-        // TODO: revoke authentication
     }
 }
 
