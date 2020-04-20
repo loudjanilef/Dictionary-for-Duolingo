@@ -24,8 +24,7 @@ class LoginViewModel : ViewModel() {
         val result = loginRepository.login(username, password)
 
         if (result is Result.Success) {
-            _loginResult.value =
-                LoginResult(success = result.data)
+            _loginResult.value = LoginResult(success = result.data)
         } else {
             _loginResult.value = LoginResult(error = R.string.login_failed)
         }
