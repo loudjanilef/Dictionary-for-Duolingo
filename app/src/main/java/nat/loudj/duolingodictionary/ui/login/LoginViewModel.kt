@@ -4,6 +4,8 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import nat.loudj.duolingodictionary.R
 import nat.loudj.duolingodictionary.data.Result
 import nat.loudj.duolingodictionary.data.login.LoginRepository
@@ -17,7 +19,7 @@ class LoginViewModel : ViewModel() {
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    fun login(username: String, password: String) {
+    suspend fun login(username: String, password: String) = withContext(Dispatchers.Main) {
         // can be launched in a separate asynchronous job
         val result = loginRepository.login(username, password)
 

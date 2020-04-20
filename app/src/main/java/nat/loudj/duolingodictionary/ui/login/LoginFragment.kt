@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import nat.loudj.duolingodictionary.R
 import nat.loudj.duolingodictionary.data.model.User
 
@@ -81,7 +83,7 @@ class LoginFragment : Fragment() {
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
-                        loginViewModel.login(
+                        login(
                             view.username.text.toString(),
                             view.password.text.toString()
                         )
@@ -92,11 +94,14 @@ class LoginFragment : Fragment() {
 
         view.login.setOnClickListener {
             view.loading.visibility = View.VISIBLE
-            loginViewModel.login(view.username.text.toString(), view.password.text.toString())
+            login(view.username.text.toString(), view.password.text.toString())
         }
 
         return view
     }
+
+    private fun login(username: String, password: String) =
+        GlobalScope.launch { loginViewModel.login(username, password) }
 
 
     private fun updateUiWithUser(model: User) {
