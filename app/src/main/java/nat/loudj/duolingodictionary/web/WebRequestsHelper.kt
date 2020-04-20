@@ -12,7 +12,7 @@ import org.json.JSONObject
 
 object WebRequestsHelper {
     private val client = OkHttpClient.Builder().retryOnConnectionFailure(true).build()
-    const val BASE_URL = "www.duolingo.com"
+    private const val BASE_URL = "www.duolingo.com"
 
     suspend fun execute(request: Request): Response = withContext(Dispatchers.IO) {
         client.newCall(request).execute()
