@@ -9,6 +9,8 @@ import nat.loudj.duolingodictionary.data.model.User
  * maintains an in-memory cache of login status and user credentials information.
  */
 object LoginRepository {
+    private const val USERNAME_KEY = "username"
+    private const val JWT_KEY = "jwt"
 
     // in-memory cache of the loggedInUser object
     var user: User? = null
@@ -19,8 +21,8 @@ object LoginRepository {
 
     init {
         user = null
-        val username = PreferencesManager.read("username")
-        val jwt = PreferencesManager.read("jwt")
+        val username = PreferencesManager.read(USERNAME_KEY)
+        val jwt = PreferencesManager.read(JWT_KEY)
         if (username != null && jwt != null) {
             user = User(username, jwt)
         }
@@ -28,8 +30,8 @@ object LoginRepository {
 
     fun logout() {
         user = null
-        PreferencesManager.delete("username")
-        PreferencesManager.delete("jwt")
+        PreferencesManager.delete(USERNAME_KEY)
+        PreferencesManager.delete(JWT_KEY)
     }
 
     suspend fun login(username: String, password: String): Result<User> {
@@ -38,8 +40,8 @@ object LoginRepository {
 
         if (result is Result.Success) {
             user = result.data
-            PreferencesManager.write("username", result.data.userName)
-            PreferencesManager.write("jwt", result.data.jwt)
+            PreferencesManager.write(USERNAME_KEY, result.data.userName)
+            PreferencesManager.write(JWT_KEY, result.data.jwt)
         }
 
         return result
