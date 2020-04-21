@@ -19,7 +19,6 @@ class LoginViewModel : ViewModel() {
     val loginResult: LiveData<LoginResult> = _loginResult
 
     suspend fun login(username: String, password: String) = withContext(Dispatchers.Main) {
-        // can be launched in a separate asynchronous job
         val result = LoginRepository.login(username, password)
 
         if (result is Result.Success) {
@@ -40,7 +39,12 @@ class LoginViewModel : ViewModel() {
         }
     }
 
-    // A placeholder username validation check
+    /**
+     * [username] validation
+     *
+     * @param username
+     * @return
+     */
     private fun isUserNameValid(username: String): Boolean {
         return if (username.contains('@')) {
             Patterns.EMAIL_ADDRESS.matcher(username).matches()
@@ -49,8 +53,13 @@ class LoginViewModel : ViewModel() {
         }
     }
 
-    // A placeholder password validation check
+    /**
+     * [password] validation
+     *
+     * @param password
+     * @return
+     */
     private fun isPasswordValid(password: String): Boolean {
-        return password.length > 5
+        return password.isNotBlank()
     }
 }

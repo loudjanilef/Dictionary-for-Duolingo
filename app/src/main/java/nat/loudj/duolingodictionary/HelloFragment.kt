@@ -10,9 +10,8 @@ import kotlinx.android.synthetic.main.fragment_hello.view.*
 import nat.loudj.duolingodictionary.data.login.LoginRepository
 
 /**
- * A simple [Fragment] subclass.
- * Use the [HelloFragment] factory method to
- * create an instance of this fragment.
+ * The base [Fragment] of the app.
+ * Will be deleted oncce the app is complete
  */
 class HelloFragment : Fragment() {
 

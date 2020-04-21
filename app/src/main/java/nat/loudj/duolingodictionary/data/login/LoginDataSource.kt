@@ -6,10 +6,17 @@ import nat.loudj.duolingodictionary.web.WebRequestsHelper
 import java.io.IOException
 
 /**
- * Handles authentication with login credentials and retrieves user information.
+ * Object that handles authentication with login credentials and retrieves user information.
  */
 object LoginDataSource {
 
+    /**
+     * Login the user on the distant server
+     *
+     * @param username
+     * @param password
+     * @return The user or an error
+     */
     suspend fun login(username: String, password: String): Result<User> {
         return try {
             val request = WebRequestsHelper.createRequest(
