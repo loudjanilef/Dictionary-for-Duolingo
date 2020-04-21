@@ -15,12 +15,11 @@ import nat.loudj.duolingodictionary.data.login.LoginRepository
  * create an instance of this fragment.
  */
 class HelloFragment : Fragment() {
-    private val loginRepository = LoginRepository.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (!loginRepository.isLoggedIn) {
+        if (!LoginRepository.isLoggedIn) {
             navigateToLogin()
         }
     }
@@ -31,7 +30,7 @@ class HelloFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_hello, container, false)
         view.logout.setOnClickListener {
-            loginRepository.logout()
+            LoginRepository.logout()
             navigateToLogin()
         }
         return view

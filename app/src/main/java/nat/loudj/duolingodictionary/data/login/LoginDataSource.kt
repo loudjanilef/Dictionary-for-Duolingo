@@ -6,9 +6,9 @@ import nat.loudj.duolingodictionary.web.WebRequestsHelper
 import java.io.IOException
 
 /**
- * Class that handles authentication w/ login credentials and retrieves user information.
+ * Handles authentication with login credentials and retrieves user information.
  */
-class LoginDataSource {
+object LoginDataSource {
 
     suspend fun login(username: String, password: String): Result<User> {
         return try {

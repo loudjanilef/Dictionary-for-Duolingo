@@ -8,8 +8,7 @@ import nat.loudj.duolingodictionary.data.model.User
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
-
-class LoginRepository(val dataSource: LoginDataSource) {
+object LoginRepository {
 
     // in-memory cache of the loggedInUser object
     var user: User? = null
@@ -35,7 +34,7 @@ class LoginRepository(val dataSource: LoginDataSource) {
 
     suspend fun login(username: String, password: String): Result<User> {
         // handle login
-        val result = dataSource.login(username, password)
+        val result = LoginDataSource.login(username, password)
 
         if (result is Result.Success) {
             user = result.data
@@ -44,15 +43,5 @@ class LoginRepository(val dataSource: LoginDataSource) {
         }
 
         return result
-    }
-
-    companion object {
-        @Volatile
-        private var instance: LoginRepository? = null
-
-        fun getInstance() =
-            instance ?: synchronized(this) {
-                instance ?: LoginRepository(dataSource = LoginDataSource()).also { instance = it }
-            }
     }
 }

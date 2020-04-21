@@ -14,14 +14,13 @@ class LoginViewModel : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
-    private val loginRepository = LoginRepository.getInstance()
 
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
     suspend fun login(username: String, password: String) = withContext(Dispatchers.Main) {
         // can be launched in a separate asynchronous job
-        val result = loginRepository.login(username, password)
+        val result = LoginRepository.login(username, password)
 
         if (result is Result.Success) {
             _loginResult.value = LoginResult(success = result.data)
