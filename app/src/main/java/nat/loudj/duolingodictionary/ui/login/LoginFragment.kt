@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,7 +13,6 @@ import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import nat.loudj.duolingodictionary.R
-import nat.loudj.duolingodictionary.data.model.User
 import nat.loudj.duolingodictionary.helpers.afterTextChanged
 
 class LoginFragment : Fragment() {
@@ -50,11 +47,8 @@ class LoginFragment : Fragment() {
             val loginResult = it ?: return@Observer
 
             view.loading.visibility = View.GONE
-            if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
-            }
+
             if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
                 val action = LoginFragmentDirections.actionLoginFragmentToHelloFragment()
                 findNavController().navigate(action)
             }
@@ -97,21 +91,5 @@ class LoginFragment : Fragment() {
 
     private fun login(username: String, password: String) =
         GlobalScope.launch { loginViewModel.login(username, password) }
-
-
-    private fun updateUiWithUser(model: User) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.userName
-        // TODO : initiate successful logged in experience
-        Toast.makeText(
-            context,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(context, errorString, Toast.LENGTH_SHORT).show()
-    }
 }
 
