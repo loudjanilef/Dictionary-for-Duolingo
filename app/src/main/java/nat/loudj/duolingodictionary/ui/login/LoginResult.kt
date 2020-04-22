@@ -1,11 +1,11 @@
 package nat.loudj.duolingodictionary.ui.login
 
-import nat.loudj.duolingodictionary.data.model.User
+import nat.loudj.duolingodictionary.data.model.UserToken
 
 /**
  * Authentication result : success (user details) or error message.
  */
 data class LoginResult(
-    val success: User? = null,
+    val success: UserToken? = null,
     val error: Int? = null
 )

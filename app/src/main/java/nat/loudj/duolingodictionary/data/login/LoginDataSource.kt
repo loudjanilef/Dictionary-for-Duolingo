@@ -1,7 +1,7 @@
 package nat.loudj.duolingodictionary.data.login
 
 import nat.loudj.duolingodictionary.data.Result
-import nat.loudj.duolingodictionary.data.model.User
+import nat.loudj.duolingodictionary.data.model.UserToken
 import nat.loudj.duolingodictionary.web.WebRequestsHelper
 import java.io.IOException
 
@@ -17,7 +17,7 @@ object LoginDataSource {
      * @param password
      * @return The user or an error
      */
-    suspend fun login(username: String, password: String): Result<User> {
+    suspend fun login(username: String, password: String): Result<UserToken> {
         return try {
             val request = WebRequestsHelper.createRequest(
                 "login",
@@ -27,7 +27,8 @@ object LoginDataSource {
             if (!response.isSuccessful)
                 throw Error("Invalid credentials")
 
-            val fakeUser = User(username, response.headers["jwt"] ?: throw Error("No token issued"))
+            val fakeUser =
+                UserToken(username, response.headers["jwt"] ?: throw Error("No token issued"))
             response.close()
             Result.Success(fakeUser)
         } catch (e: Throwable) {
