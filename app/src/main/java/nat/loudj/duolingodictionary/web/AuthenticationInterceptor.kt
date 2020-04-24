@@ -10,7 +10,7 @@ class AuthenticationInterceptor : Interceptor {
         var request = chain.request()
         val requestBuilder = request.newBuilder()
 
-        LoginRepository.userToken?.let { token ->
+        LoginRepository.user?.let { token ->
             requestBuilder.addHeader(
                 "Authorization",
                 "Bearer ${token.jwt}"

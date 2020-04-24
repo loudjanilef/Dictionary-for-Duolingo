@@ -11,7 +11,7 @@ import java.io.IOException
 
 object LanguagesDataSource {
     suspend fun getSpokenLanguages(): Result<List<Language>> {
-        val username = LoginRepository.userToken?.userName
+        val username = LoginRepository.user?.userName
             ?: return Result.Error(IllegalStateException("Not connected"))
 
         return try {

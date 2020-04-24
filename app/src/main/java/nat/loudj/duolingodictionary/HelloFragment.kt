@@ -18,7 +18,7 @@ class HelloFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        LoginRepository.userToken ?: navigateToLogin()
+        LoginRepository.user ?: navigateToLogin()
     }
 
     override fun onCreateView(
