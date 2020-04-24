@@ -30,11 +30,19 @@ class HelloFragment : Fragment() {
             LoginRepository.logout()
             navigateToLogin()
         }
+        view.goToLanguages.setOnClickListener {
+            navigateToSpokenLanguages()
+        }
         return view
     }
 
     private fun navigateToLogin() {
         val action = HelloFragmentDirections.actionHelloFragmentToLoginFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToSpokenLanguages() {
+        val action = HelloFragmentDirections.actionHelloFragmentToSpokenLanguagesFragment()
         findNavController().navigate(action)
     }
 }

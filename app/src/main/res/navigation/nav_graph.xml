@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_helloFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_helloFragment_to_spokenLanguagesFragment"
+            app:destination="@id/spokenLanguagesFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -22,4 +25,9 @@
             android:id="@+id/action_loginFragment_to_helloFragment"
             app:destination="@id/helloFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/spokenLanguagesFragment"
+        android:name="nat.loudj.duolingodictionary.ui.languages.SpokenLanguagesFragment"
+        android:label="fragment_spoken_languages_grid"
+        tools:layout="@layout/fragment_spoken_languages" />
 </navigation>
