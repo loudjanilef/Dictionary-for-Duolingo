@@ -15,9 +15,7 @@ import nat.loudj.duolingodictionary.data.model.Language
 import nat.loudj.duolingodictionary.ui.languages.LanguagesRecyclerViewAdapter.OnLanguagesListInteractionListener
 
 /**
- * A fragment representing a list of Items.
- * Activities containing this fragment MUST implement the
- * [LanguagesRecyclerViewAdapter.OnLanguagesListInteractionListener] interface.
+ * A fragment representing the list of user spoken languages
  */
 class SpokenLanguagesFragment : Fragment(), OnLanguagesListInteractionListener {
     private val columnCount = 2

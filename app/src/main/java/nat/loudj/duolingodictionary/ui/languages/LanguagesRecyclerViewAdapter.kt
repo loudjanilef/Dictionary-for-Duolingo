@@ -59,6 +59,10 @@ class LanguagesRecyclerViewAdapter(
         }
     }
 
+    /**
+     * This interface must be implemented by all the elements that need to react on list element click
+     *
+     */
     interface OnLanguagesListInteractionListener {
         fun onLanguageClick(item: Language)
     }
