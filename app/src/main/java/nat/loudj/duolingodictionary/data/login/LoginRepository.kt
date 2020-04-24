@@ -19,9 +19,6 @@ object LoginRepository {
     var userToken: UserToken? = null
         private set
 
-    val isLoggedIn: Boolean
-        get() = userToken != null
-
     /**
      * Load user from storage
      */
