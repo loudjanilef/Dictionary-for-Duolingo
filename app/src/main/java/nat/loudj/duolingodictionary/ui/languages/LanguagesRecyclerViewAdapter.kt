@@ -8,20 +8,21 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_language.view.*
 import nat.loudj.duolingodictionary.R
+import nat.loudj.duolingodictionary.data.model.Language
 import nat.loudj.duolingodictionary.ui.languages.LanguagesRecyclerViewAdapter.OnLanguagesListInteractionListener
-import nat.loudj.duolingodictionary.ui.languages.dummy.DummyContent.DummyItem
 
 /**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
+ * [RecyclerView.Adapter] that can display a [Language] and makes a call to the
  * specified [OnLanguagesListInteractionListener].
  */
 class LanguagesRecyclerViewAdapter(
-    private val mValues: List<DummyItem>,
     private val mListener: OnLanguagesListInteractionListener
 ) : RecyclerView.Adapter<LanguagesRecyclerViewAdapter.ViewHolder>() {
 
+    private var mValues: List<Language> = emptyList()
+
     private val mOnClickListener: View.OnClickListener = View.OnClickListener { v ->
-        val item = v.tag as DummyItem
+        val item = v.tag as Language
         mListener.onLanguageClick(item)
     }
 
@@ -34,12 +35,17 @@ class LanguagesRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
         holder.mIdView.text = item.id
-        holder.mContentView.text = item.content
+        holder.mContentView.text = item.name
 
         with(holder.mView) {
             tag = item
             setOnClickListener(mOnClickListener)
         }
+    }
+
+    fun setValues(values: List<Language>) {
+        this.mValues = values
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = mValues.size
@@ -54,6 +60,6 @@ class LanguagesRecyclerViewAdapter(
     }
 
     interface OnLanguagesListInteractionListener {
-        fun onLanguageClick(item: DummyItem)
+        fun onLanguageClick(item: Language)
     }
 }

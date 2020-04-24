@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import nat.loudj.duolingodictionary.R
+import nat.loudj.duolingodictionary.data.model.Language
 import nat.loudj.duolingodictionary.ui.languages.LanguagesRecyclerViewAdapter.OnLanguagesListInteractionListener
-import nat.loudj.duolingodictionary.ui.languages.dummy.DummyContent
 
 /**
  * A fragment representing a list of Items.
@@ -20,13 +22,21 @@ import nat.loudj.duolingodictionary.ui.languages.dummy.DummyContent
 class SpokenLanguagesFragment : Fragment(), OnLanguagesListInteractionListener {
     private val columnCount = 2
 
-    private var listener: OnLanguagesListInteractionListener = this
+    private val languagesRecyclerViewAdapter = LanguagesRecyclerViewAdapter(this)
+    private lateinit var spokenLanguagesViewModel: SpokenLanguagesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view = inflater.inflate(R.layout.fragment_spoken_languages, container, false)
+
+        spokenLanguagesViewModel = ViewModelProvider(this).get(SpokenLanguagesViewModel::class.java)
+
+        spokenLanguagesViewModel.languagesList.observe(
+            viewLifecycleOwner,
+            Observer { languagesRecyclerViewAdapter.setValues(it) }
+        )
 
         // Set the adapter
         if (view is RecyclerView) {
@@ -35,13 +45,13 @@ class SpokenLanguagesFragment : Fragment(), OnLanguagesListInteractionListener {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = LanguagesRecyclerViewAdapter(DummyContent.ITEMS, listener)
+                adapter = languagesRecyclerViewAdapter
             }
         }
         return view
     }
 
-    override fun onLanguageClick(item: DummyContent.DummyItem) {
-        println(item.content)
+    override fun onLanguageClick(item: Language) {
+        println(item)
     }
 }
