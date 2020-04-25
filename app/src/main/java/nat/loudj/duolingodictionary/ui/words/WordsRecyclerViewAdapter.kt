@@ -12,8 +12,8 @@ import nat.loudj.duolingodictionary.data.model.WordWithTranslations
 import nat.loudj.duolingodictionary.ui.words.WordsRecyclerViewAdapter.OnWordsListInteractionListener
 
 /**
- * [RecyclerView.Adapter] that can display a [WordWithTranslations] and makes a call to the
- * specified [OnWordsListInteractionListener].
+ * [RecyclerView.Adapter] that can display a list of [WordWithTranslations] and makes a call to the
+ * specified [OnWordsListInteractionListener] on element click.
  */
 class WordsRecyclerViewAdapter(
     private val mListener: OnWordsListInteractionListener

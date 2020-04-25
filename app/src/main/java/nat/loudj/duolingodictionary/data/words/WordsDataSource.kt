@@ -10,7 +10,17 @@ import nat.loudj.duolingodictionary.web.WebRequestsManager
 import org.json.JSONObject
 import java.io.IOException
 
+/**
+ * Object that handle getting words from server
+ */
 object WordsDataSource {
+
+    /**
+     * Fetch known words for [languageId]
+     *
+     * @param languageId
+     * @return
+     */
     suspend fun getKnownWords(languageId: String): Result<List<WordWithTranslations>> {
         val username = LoginRepository.user?.userName
             ?: return Result.Error(IllegalStateException("Not connected"))

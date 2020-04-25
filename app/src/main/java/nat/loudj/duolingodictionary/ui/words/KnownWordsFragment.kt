@@ -14,9 +14,7 @@ import nat.loudj.duolingodictionary.R
 import nat.loudj.duolingodictionary.data.model.WordWithTranslations
 
 /**
- * A fragment representing a list of Items.
- * Activities containing this fragment MUST implement the
- * [WordsRecyclerViewAdapter.OnWordsListInteractionListener] interface.
+ * A fragment representing the list of known words for a language
  */
 class KnownWordsFragment : Fragment(), WordsRecyclerViewAdapter.OnWordsListInteractionListener {
     private val wordsRecyclerViewAdapter = WordsRecyclerViewAdapter(this)

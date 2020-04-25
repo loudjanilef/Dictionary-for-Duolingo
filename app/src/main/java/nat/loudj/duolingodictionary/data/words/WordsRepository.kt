@@ -7,7 +7,17 @@ import kotlinx.coroutines.launch
 import nat.loudj.duolingodictionary.data.Result
 import nat.loudj.duolingodictionary.data.model.WordWithTranslations
 
+/**
+ * Objects that handle getting words
+ */
 object WordsRepository {
+
+    /**
+     * Get known words for specified [languageId]
+     *
+     * @param languageId
+     * @return
+     */
     fun getKnownWords(languageId: String): MutableLiveData<List<WordWithTranslations>> {
         val knownWords = MutableLiveData<List<WordWithTranslations>>()
         GlobalScope.launch(Dispatchers.Main) {
