@@ -22,10 +22,12 @@ object WordsDataSource {
             if (!wordsResponse.isSuccessful)
                 throw Error("Invalid credentials")
 
-            val knownWords = withContext(Dispatchers.IO) {
+            val (knownWords, learningLanguageId) = withContext(Dispatchers.IO) {
                 val bodyString = wordsResponse.body?.string() ?: throw  Error("Nothing returned")
                 val bodyJson = JSONObject(bodyString)
-                adaptKnownWords(bodyJson, languageId)
+                val knownWords = adaptKnownWords(bodyJson, languageId)
+                val learningLanguageId = adaptLearningLanguageKey(bodyJson)
+                Pair(knownWords, learningLanguageId)
             }
 
             val translationsRequest = WebRequestsManager.createGetRequest(
@@ -35,7 +37,7 @@ object WordsDataSource {
                 "dictionary",
                 "hints",
                 languageId,
-                "fr",
+                learningLanguageId,
                 params = listOf(
                     Pair(
                         "tokens",
@@ -61,6 +63,8 @@ object WordsDataSource {
             Result.Error(IOException("Error retrieving languages", e))
         }
     }
+
+    private fun adaptLearningLanguageKey(json: JSONObject): String = json.getString("ui_language")
 
     private fun adaptKnownWords(json: JSONObject, languageId: String): List<String> {
         val knownWords = mutableListOf<String>()
