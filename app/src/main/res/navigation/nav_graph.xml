@@ -29,5 +29,18 @@
         android:id="@+id/spokenLanguagesFragment"
         android:name="nat.loudj.duolingodictionary.ui.languages.SpokenLanguagesFragment"
         android:label="fragment_spoken_languages_grid"
-        tools:layout="@layout/fragment_spoken_languages" />
+        tools:layout="@layout/fragment_spoken_languages">
+        <action
+            android:id="@+id/action_spokenLanguagesFragment_to_knownWordFragment"
+            app:destination="@id/knownWordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/knownWordFragment"
+        android:name="nat.loudj.duolingodictionary.ui.words.KnownWordFragment"
+        android:label="fragment_known_words"
+        tools:layout="@layout/fragment_known_words">
+        <argument
+            android:name="languageId"
+            app:argType="string" />
+    </fragment>
 </navigation>
