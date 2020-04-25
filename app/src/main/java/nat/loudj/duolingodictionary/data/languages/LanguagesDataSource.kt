@@ -15,7 +15,8 @@ object LanguagesDataSource {
             ?: return Result.Error(IllegalStateException("Not connected"))
 
         return try {
-            val request = WebRequestsManager.createRequest(listOf("users", username))
+            val request =
+                WebRequestsManager.createGetRequest(WebRequestsManager.BASE_URL, "users", username)
             val response = WebRequestsManager.execute(request)
 
             if (!response.isSuccessful)

@@ -11,7 +11,8 @@ import okhttp3.Response
 import org.json.JSONObject
 
 object WebRequestsManager {
-    private const val BASE_URL = "www.duolingo.com"
+    const val BASE_URL = "www.duolingo.com"
+    const val DICTIONARY_URL = "d2.duolingo.com"
     private val client = OkHttpClient.Builder()
         .addInterceptor(AuthenticationInterceptor())
         .build()
@@ -20,24 +21,37 @@ object WebRequestsManager {
         client.newCall(request).execute()
     }
 
-    fun createRequest(
-        path: List<String>,
-        vararg params: Pair<String, String>
+    fun createGetRequest(
+        baseUrl: String,
+        vararg path: String,
+        params: List<Pair<String, String>> = emptyList()
     ): Request {
-        val builder = Uri.Builder().scheme("https").authority(BASE_URL)
+        val builder = Uri.Builder().scheme("https").authority(baseUrl)
+        for (subpath in path) {
+            builder.appendPath(subpath)
+        }
+        for (param in params) {
+            builder.appendQueryParameter(param.first, param.second)
+        }
+        val url = builder.build().toString()
+
+        return Request.Builder().url(url).get().build()
+    }
+
+    fun createPostRequest(
+        baseUrl: String,
+        vararg path: String,
+        params: List<Pair<String, String>> = emptyList()
+    ): Request {
+        val builder = Uri.Builder().scheme("https").authority(baseUrl)
         for (subpath in path) {
             builder.appendPath(subpath)
         }
         val url = builder.build().toString()
 
-        val request = Request.Builder().url(url)
-
-        if (params.isNullOrEmpty())
-            return request.get().build()
-
         val jsonBody = JSONObject()
         params.forEach { jsonBody.put(it.first, it.second) }
         val requestBody = jsonBody.toString().toRequestBody("application/json".toMediaTypeOrNull())
-        return request.post(requestBody).build()
+        return Request.Builder().url(url).post(requestBody).build()
     }
 }

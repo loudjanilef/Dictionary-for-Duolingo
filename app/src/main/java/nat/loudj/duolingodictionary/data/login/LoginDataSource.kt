@@ -19,10 +19,13 @@ object LoginDataSource {
      */
     suspend fun login(username: String, password: String): Result<User> {
         return try {
-            val request = WebRequestsManager.createRequest(
-                listOf("login"),
-                Pair("login", username),
-                Pair("password", password)
+            val request = WebRequestsManager.createPostRequest(
+                WebRequestsManager.BASE_URL,
+                "login",
+                params = listOf(
+                    Pair("login", username),
+                    Pair("password", password)
+                )
             )
             val response = WebRequestsManager.execute(request)
             if (!response.isSuccessful)
