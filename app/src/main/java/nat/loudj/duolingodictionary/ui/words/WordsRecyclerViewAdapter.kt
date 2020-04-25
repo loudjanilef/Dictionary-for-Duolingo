@@ -8,20 +8,20 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_word_with_translation.view.*
 import nat.loudj.duolingodictionary.R
+import nat.loudj.duolingodictionary.data.model.WordWithTranslations
 import nat.loudj.duolingodictionary.ui.words.WordsRecyclerViewAdapter.OnWordsListInteractionListener
-import nat.loudj.duolingodictionary.ui.words.dummy.DummyContent.DummyItem
 
 /**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
+ * [RecyclerView.Adapter] that can display a [WordWithTranslations] and makes a call to the
  * specified [OnWordsListInteractionListener].
  */
 class WordsRecyclerViewAdapter(
-    private val mValues: List<DummyItem>,
     private val mListener: OnWordsListInteractionListener
 ) : RecyclerView.Adapter<WordsRecyclerViewAdapter.ViewHolder>() {
+    private var mValues: List<WordWithTranslations> = emptyList()
 
     private val mOnClickListener = View.OnClickListener { v ->
-        val item = v.tag as DummyItem
+        val item = v.tag as WordWithTranslations
         mListener.onWordClick(item)
     }
 
@@ -34,13 +34,18 @@ class WordsRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mIdView.text = item.id
-        holder.mContentView.text = item.content
+        holder.mIdView.text = item.word
+        holder.mContentView.text = item.translations.joinToString()
 
         with(holder.mView) {
             tag = item
             setOnClickListener(mOnClickListener)
         }
+    }
+
+    fun setValues(values: List<WordWithTranslations>) {
+        this.mValues = values
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = mValues.size
@@ -59,6 +64,6 @@ class WordsRecyclerViewAdapter(
      *
      */
     interface OnWordsListInteractionListener {
-        fun onWordClick(item: DummyItem)
+        fun onWordClick(item: WordWithTranslations)
     }
 }

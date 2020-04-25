@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/knownWordFragment"
-        android:name="nat.loudj.duolingodictionary.ui.words.KnownWordFragment"
+        android:name="nat.loudj.duolingodictionary.ui.words.KnownWordsFragment"
         android:label="fragment_known_words"
         tools:layout="@layout/fragment_known_words">
         <argument
