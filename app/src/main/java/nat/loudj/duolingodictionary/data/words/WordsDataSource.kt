@@ -1,5 +1,6 @@
 package nat.loudj.duolingodictionary.data.words
 
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import nat.loudj.duolingodictionary.data.Result
@@ -15,12 +16,20 @@ object WordsDataSource {
             ?: return Result.Error(IllegalStateException("Not connected"))
 
         return try {
+            val switchLanguageRequest = WebRequestsManager.createPostRequest(
+                WebRequestsManager.BASE_URL,
+                "switch_language",
+                params = listOf(Pair("learning_language", languageId))
+            )
+            val switchLanguageResponse = WebRequestsManager.execute(switchLanguageRequest)
+            if (!switchLanguageResponse.isSuccessful)
+                throw Error("Request to switch language failed" + switchLanguageResponse.code)
+
             val wordsRequest =
                 WebRequestsManager.createGetRequest(WebRequestsManager.BASE_URL, "users", username)
             val wordsResponse = WebRequestsManager.execute(wordsRequest)
-
             if (!wordsResponse.isSuccessful)
-                throw Error("Invalid credentials")
+                throw Error("Request for words failed" + wordsResponse.code)
 
             val (knownWords, learningLanguageId) = withContext(Dispatchers.IO) {
                 val bodyString = wordsResponse.body?.string() ?: throw  Error("Nothing returned")
@@ -50,6 +59,8 @@ object WordsDataSource {
                 )
             )
             val translationsResponse = WebRequestsManager.execute(translationsRequest)
+            if (!translationsResponse.isSuccessful)
+                throw Error("Request for translations failed" + translationsResponse.code)
 
             val knownWordsWithTranslations = withContext(Dispatchers.IO) {
                 val bodyString =
@@ -60,6 +71,7 @@ object WordsDataSource {
 
             Result.Success(knownWordsWithTranslations)
         } catch (e: Throwable) {
+            Log.e(this::class.simpleName, e.message ?: "Error")
             Result.Error(IOException("Error retrieving languages", e))
         }
     }
