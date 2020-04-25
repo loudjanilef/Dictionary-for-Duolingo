@@ -1,5 +1,6 @@
 package nat.loudj.duolingodictionary.data.languages
 
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import nat.loudj.duolingodictionary.data.Result
@@ -18,9 +19,8 @@ object LanguagesDataSource {
             val request =
                 WebRequestsManager.createGetRequest(WebRequestsManager.BASE_URL, "users", username)
             val response = WebRequestsManager.execute(request)
-
             if (!response.isSuccessful)
-                throw Error("Invalid credentials")
+                throw Error("Request for languages failed : " + response.code)
 
             val languagesList = withContext(Dispatchers.IO) {
                 val bodyString = response.body?.string() ?: throw  Error("Nothing returned")
@@ -30,6 +30,7 @@ object LanguagesDataSource {
 
             Result.Success(languagesList)
         } catch (e: Throwable) {
+            Log.e(this::class.simpleName, e.message ?: "Error")
             Result.Error(IOException("Error retrieving languages", e))
         }
     }

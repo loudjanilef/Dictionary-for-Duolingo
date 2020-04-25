@@ -11,6 +11,7 @@ import nat.loudj.duolingodictionary.data.model.User
  */
 object LoginRepository {
     private const val USERNAME_KEY = "username"
+    private const val USER_ID = "user_id"
     private const val JWT_KEY = "jwt"
 
     /**
@@ -25,9 +26,10 @@ object LoginRepository {
     init {
         user = null
         val username = PreferencesManager.read(USERNAME_KEY)
+        val userId = PreferencesManager.read(USER_ID)
         val jwt = PreferencesManager.read(JWT_KEY)
-        if (username != null && jwt != null) {
-            user = User(username, jwt)
+        if (username != null && userId != null && jwt != null) {
+            user = User(username, userId, jwt)
         }
     }
 
@@ -37,6 +39,7 @@ object LoginRepository {
     fun logout() {
         user = null
         PreferencesManager.delete(USERNAME_KEY)
+        PreferencesManager.delete(USER_ID)
         PreferencesManager.delete(JWT_KEY)
     }
 
@@ -55,6 +58,7 @@ object LoginRepository {
         if (result is Result.Success) {
             user = result.data
             PreferencesManager.write(USERNAME_KEY, result.data.userName)
+            PreferencesManager.write(USER_ID, result.data.userId)
             PreferencesManager.write(JWT_KEY, result.data.jwt)
         }
 

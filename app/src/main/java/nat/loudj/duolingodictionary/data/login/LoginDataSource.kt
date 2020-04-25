@@ -1,8 +1,12 @@
 package nat.loudj.duolingodictionary.data.login
 
+import android.util.Log
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import nat.loudj.duolingodictionary.data.Result
 import nat.loudj.duolingodictionary.data.model.User
 import nat.loudj.duolingodictionary.web.WebRequestsManager
+import org.json.JSONObject
 import java.io.IOException
 
 /**
@@ -31,15 +35,24 @@ object LoginDataSource {
             if (!response.isSuccessful)
                 throw Error("Invalid credentials")
 
-            val userToken = User(
-                username, response.headers["jwt"]
-                    ?: throw Error("No token issued")
-            )
-            response.close()
-            Result.Success(userToken)
+            val user = withContext(Dispatchers.IO) {
+                val bodyString = response.body?.string() ?: throw  Error("Nothing returned")
+                val jsonBody = JSONObject(bodyString)
+                val jwt = response.headers["jwt"] ?: throw Error("No token issued")
+                adaptUser(jsonBody, jwt)
+            }
+
+            Result.Success(user)
         } catch (e: Throwable) {
+            Log.e(this::class.simpleName, e.message ?: "Error")
             Result.Error(IOException("Error logging in", e))
         }
+    }
+
+    private fun adaptUser(json: JSONObject, jwt: String): User {
+        val username = json.getString("username")
+        val id = json.getString("user_id")
+        return User(username, id, jwt)
     }
 }
 

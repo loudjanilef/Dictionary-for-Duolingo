@@ -5,5 +5,6 @@ package nat.loudj.duolingodictionary.data.model
  */
 data class User(
     val userName: String,
+    val userId: String,
     val jwt: String
 )
