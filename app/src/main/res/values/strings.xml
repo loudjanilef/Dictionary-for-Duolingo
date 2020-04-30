@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">DuolingoDictionary</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -10,7 +9,5 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Please enter a password</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="logout">Log out</string>
     <string name="wrong_credentials">Invalid username/password</string>
-    <string name="go_to_languages">Go to languages</string>
 </resources>
