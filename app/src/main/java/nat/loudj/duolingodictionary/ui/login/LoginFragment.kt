@@ -49,7 +49,7 @@ class LoginFragment : Fragment() {
             view.loading.visibility = View.GONE
 
             if (loginResult.success != null) {
-                val action = LoginFragmentDirections.actionLoginFragmentToHelloFragment()
+                val action = LoginFragmentDirections.actionLoginFragmentToSpokenLanguagesFragment()
                 findNavController().navigate(action)
             }
         })

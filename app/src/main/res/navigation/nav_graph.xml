@@ -3,27 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/helloFragment">
-    <fragment
-        android:id="@+id/helloFragment"
-        android:name="nat.loudj.duolingodictionary.HelloFragment"
-        android:label="fragment_hello"
-        tools:layout="@layout/fragment_hello">
-        <action
-            android:id="@+id/action_helloFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_helloFragment_to_spokenLanguagesFragment"
-            app:destination="@id/spokenLanguagesFragment" />
-    </fragment>
+    app:startDestination="@id/spokenLanguagesFragment">
     <fragment
         android:id="@+id/loginFragment"
         android:name="nat.loudj.duolingodictionary.ui.login.LoginFragment"
         android:label="activity_login"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_loginFragment_to_helloFragment"
-            app:destination="@id/helloFragment" />
+            android:id="@+id/action_loginFragment_to_spokenLanguagesFragment"
+            app:destination="@id/spokenLanguagesFragment"
+            app:popUpTo="@id/nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/spokenLanguagesFragment"
@@ -43,4 +32,9 @@
             android:name="languageId"
             app:argType="string" />
     </fragment>
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
 </navigation>
