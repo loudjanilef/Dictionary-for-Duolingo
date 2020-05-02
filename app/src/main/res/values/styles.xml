@@ -8,6 +8,7 @@
         <item name="colorSecondary">@color/colorAccent</item>
         <item name="colorSecondaryVariant">@color/colorPrimaryLight</item>
         <item name="android:textColorPrimary">@color/colorAccent</item>
+        <item name="fontFamily">@font/nunito_bold</item>
 
         <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox
         </item>
