@@ -14,6 +14,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import nat.loudj.duolingodictionary.R
 import nat.loudj.duolingodictionary.helpers.afterTextChanged
+import nat.loudj.duolingodictionary.helpers.hideKeyboard
 
 class LoginFragment : Fragment() {
 
@@ -36,10 +37,10 @@ class LoginFragment : Fragment() {
             view.login.isEnabled = loginState.isDataValid
 
             if (loginState.usernameError != null) {
-                view.username.error = getString(loginState.usernameError)
+                view.usernameContainer.error = getString(loginState.usernameError)
             }
             if (loginState.passwordError != null) {
-                view.password.error = getString(loginState.passwordError)
+                view.passwordContainer.error = getString(loginState.passwordError)
             }
         })
 
@@ -55,6 +56,7 @@ class LoginFragment : Fragment() {
         })
 
         view.username.afterTextChanged {
+            view.usernameContainer.error = null
             loginViewModel.loginDataChanged(
                 view.username.text.toString(),
                 view.password.text.toString()
@@ -63,6 +65,7 @@ class LoginFragment : Fragment() {
 
         view.password.apply {
             afterTextChanged {
+                view.passwordContainer.error = null
                 loginViewModel.loginDataChanged(
                     view.username.text.toString(),
                     view.password.text.toString()
@@ -82,6 +85,7 @@ class LoginFragment : Fragment() {
         }
 
         view.login.setOnClickListener {
+            activity?.let { hideKeyboard(it) }
             view.loading.visibility = View.VISIBLE
             login(view.username.text.toString(), view.password.text.toString())
         }
