@@ -40,6 +40,13 @@ class SpokenLanguagesFragment : Fragment(), OnLanguagesListInteractionListener {
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
+                addItemDecoration(
+                    GridSpacingItemDecorator(
+                        16,
+                        resources.displayMetrics.density,
+                        columnCount
+                    )
+                )
                 layoutManager = when {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
