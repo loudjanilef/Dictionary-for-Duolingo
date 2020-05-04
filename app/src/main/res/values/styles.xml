@@ -5,14 +5,33 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryLight</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorSecondary">@color/colorAccent</item>
-        <item name="colorSecondaryVariant">@color/colorPrimaryLight</item>
+        <item name="android:colorBackground">@color/colorPrimary</item>
         <item name="android:textColorPrimary">@color/colorAccent</item>
+
         <item name="fontFamily">@font/nunito_bold</item>
 
-        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox
-        </item>
+        <item name="actionBarStyle">@style/AppTheme.AppBarStyle</item>
+        <item name="textInputStyle">@style/AppTheme.TextInput</item>
+        <item name="materialButtonStyle">@style/AppTheme.Button</item>
         <item name="shapeAppearanceSmallComponent">@style/AppTheme.SmallComponent</item>
+    </style>
+
+    <style name="AppTheme.AppBarStyle" parent="Widget.MaterialComponents.ActionBar.Primary">
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="AppTheme.Button" parent="Widget.MaterialComponents.Button">
+        <item name="elevation">0dp</item>
+        <item name="backgroundTint">@color/button</item>
+        <item name="android:textColor">@color/button_text</item>
+    </style>
+
+    <style name="AppTheme.TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/text_input</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="hintTextColor">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/text_input_hint</item>
+        <item name="endIconTint">@color/colorAccentDark</item>
     </style>
 
     <style name="AppTheme.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
