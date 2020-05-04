@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             goToLogin()
             return true
         }
-        return false
+        return super.onKeyDown(keyCode, event)
     }
 
     private fun goToLogin() {
