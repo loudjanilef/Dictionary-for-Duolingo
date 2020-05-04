@@ -2,12 +2,13 @@ package nat.loudj.duolingodictionary.ui.languages
 
 import android.graphics.Rect
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.math.roundToInt
 
 
 class GridSpacingItemDecorator(spacingInDp: Int, density: Float, private val spanCount: Int) :
     RecyclerView.ItemDecoration() {
 
-    private val spacing = Math.round(spacingInDp * density)
+    private val spacing = (spacingInDp * density).roundToInt()
 
     override fun getItemOffsets(outRect: Rect, itemPosition: Int, parent: RecyclerView) {
         val column: Int = itemPosition % spanCount

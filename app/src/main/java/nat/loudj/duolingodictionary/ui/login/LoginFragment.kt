@@ -93,9 +93,9 @@ class LoginFragment : Fragment() {
 
     private fun login(username: String, password: String) {
         if (username.isEmpty() || password.isEmpty()) return
-        view?.let {
-            activity?.let { hideKeyboard(it) }
-            it.loading.visibility = View.VISIBLE
+        view?.let { view ->
+            activity?.let { activity -> hideKeyboard(activity) }
+            view.loading.visibility = View.VISIBLE
         }
         GlobalScope.launch { loginViewModel.login(username, password) }
     }
