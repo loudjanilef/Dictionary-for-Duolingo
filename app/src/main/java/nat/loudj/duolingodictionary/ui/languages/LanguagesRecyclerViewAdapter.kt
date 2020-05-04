@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_language.view.*
+import kotlinx.android.synthetic.main.language_item.view.*
 import nat.loudj.duolingodictionary.R
 import nat.loudj.duolingodictionary.data.model.Language
 import nat.loudj.duolingodictionary.ui.languages.LanguagesRecyclerViewAdapter.OnLanguagesListInteractionListener
@@ -28,14 +28,13 @@ class LanguagesRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_language, parent, false)
+            .inflate(R.layout.language_item, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mIdView.text = item.id
-        holder.mContentView.text = item.name
+        holder.langugeNameTextView.text = item.name
 
         with(holder.mView) {
             tag = item
@@ -51,11 +50,10 @@ class LanguagesRecyclerViewAdapter(
     override fun getItemCount(): Int = mValues.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
+        val langugeNameTextView: TextView = mView.languageName
 
         override fun toString(): String {
-            return "${super.toString()} '${mContentView.text}'"
+            return "${super.toString()} '${langugeNameTextView.text}'"
         }
     }
 

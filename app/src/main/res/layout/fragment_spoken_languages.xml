@@ -6,8 +6,9 @@
     android:name="nat.loudj.duolingodictionary.ui.languages.SpokenLanguagesFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
+    android:layout_margin="16dp"
+    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+    app:spanCount="2"
     tools:context=".ui.languages.SpokenLanguagesFragment"
-    tools:listitem="@layout/fragment_language" />
+    tools:itemCount="3"
+    tools:listitem="@layout/language_item" />
