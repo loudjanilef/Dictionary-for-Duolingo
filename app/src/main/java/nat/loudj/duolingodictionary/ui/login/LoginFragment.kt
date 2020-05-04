@@ -85,15 +85,19 @@ class LoginFragment : Fragment() {
         }
 
         view.login.setOnClickListener {
-            activity?.let { hideKeyboard(it) }
-            view.loading.visibility = View.VISIBLE
             login(view.username.text.toString(), view.password.text.toString())
         }
 
         return view
     }
 
-    private fun login(username: String, password: String) =
+    private fun login(username: String, password: String) {
+        if (username.isEmpty() || password.isEmpty()) return
+        view?.let {
+            activity?.let { hideKeyboard(it) }
+            it.loading.visibility = View.VISIBLE
+        }
         GlobalScope.launch { loginViewModel.login(username, password) }
+    }
 }
 
