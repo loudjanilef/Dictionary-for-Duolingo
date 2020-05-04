@@ -14,10 +14,15 @@
         <item name="textInputStyle">@style/AppTheme.TextInput</item>
         <item name="materialButtonStyle">@style/AppTheme.Button</item>
         <item name="shapeAppearanceSmallComponent">@style/AppTheme.SmallComponent</item>
+        <item name="android:progressBarStyle">@style/AppTheme.Progressbar</item>
     </style>
 
     <style name="AppTheme.AppBarStyle" parent="Widget.MaterialComponents.ActionBar.Primary">
         <item name="elevation">0dp</item>
+    </style>
+
+    <style name="AppTheme.Progressbar" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateTint">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.Button" parent="Widget.MaterialComponents.Button">
