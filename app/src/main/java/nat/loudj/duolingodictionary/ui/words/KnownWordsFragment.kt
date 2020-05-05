@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import nat.loudj.duolingodictionary.R
@@ -40,8 +41,10 @@ class KnownWordsFragment : Fragment(), WordsRecyclerViewAdapter.OnWordsListInter
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
-                layoutManager = LinearLayoutManager(context)
+                val linearLayoutManager = LinearLayoutManager(context)
+                layoutManager = linearLayoutManager
                 adapter = wordsRecyclerViewAdapter
+                addItemDecoration(DividerItemDecoration(context, linearLayoutManager.orientation))
             }
         }
         return view
