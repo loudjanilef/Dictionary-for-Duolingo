@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_word_with_translation.view.*
+import kotlinx.android.synthetic.main.item_word_with_translation.view.*
 import nat.loudj.duolingodictionary.R
 import nat.loudj.duolingodictionary.data.model.WordWithTranslations
 import nat.loudj.duolingodictionary.ui.words.WordsRecyclerViewAdapter.OnWordsListInteractionListener
@@ -28,7 +28,7 @@ class WordsRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_word_with_translation, parent, false)
+            .inflate(R.layout.item_word_with_translation, parent, false)
         return ViewHolder(view)
     }
 

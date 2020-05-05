@@ -10,4 +10,4 @@
     app:spanCount="2"
     tools:context=".ui.languages.SpokenLanguagesFragment"
     tools:itemCount="3"
-    tools:listitem="@layout/language_item" />
+    tools:listitem="@layout/item_language" />

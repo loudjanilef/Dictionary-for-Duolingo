@@ -9,4 +9,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.words.KnownWordsFragment"
-    tools:listitem="@layout/fragment_word_with_translation" />
+    tools:listitem="@layout/item_word_with_translation" />

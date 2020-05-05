@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.language_item.view.*
+import kotlinx.android.synthetic.main.item_language.view.*
 import nat.loudj.duolingodictionary.R
 import nat.loudj.duolingodictionary.data.model.Language
 import nat.loudj.duolingodictionary.ui.languages.LanguagesRecyclerViewAdapter.OnLanguagesListInteractionListener
@@ -28,7 +28,7 @@ class LanguagesRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.language_item, parent, false)
+            .inflate(R.layout.item_language, parent, false)
         return ViewHolder(view)
     }
 
