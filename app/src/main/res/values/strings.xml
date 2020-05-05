@@ -9,4 +9,6 @@
     <string name="login_failed">"Login failed"</string>
     <string name="wrong_credentials">Invalid username/password</string>
     <string name="app_icon">App Icon</string>
+    <string name="login_fragment_label">Login</string>
+    <string name="languages_fragment_label">Language Selection</string>
 </resources>

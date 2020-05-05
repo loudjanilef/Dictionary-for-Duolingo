@@ -59,7 +59,10 @@ class SpokenLanguagesFragment : Fragment(), OnLanguagesListInteractionListener {
 
     override fun onLanguageClick(item: Language) {
         val action =
-            SpokenLanguagesFragmentDirections.actionSpokenLanguagesFragmentToKnownWordFragment(item.id)
+            SpokenLanguagesFragmentDirections.actionSpokenLanguagesFragmentToKnownWordFragment(
+                item.id,
+                item.name
+            )
         findNavController().navigate(action)
     }
 }
