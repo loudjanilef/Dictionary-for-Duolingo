@@ -5,6 +5,7 @@ import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import nat.loudj.duolingodictionary.data.login.LoginRepository
 
@@ -17,7 +18,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        NavigationUI.setupActionBarWithNavController(this, navController)
+        val appBarConfiguration =
+            AppBarConfiguration(setOf(R.id.loginFragment, R.id.spokenLanguagesFragment))
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+
 
         LoginRepository.user ?: goToLogin()
     }
