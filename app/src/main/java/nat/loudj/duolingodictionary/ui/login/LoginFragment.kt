@@ -1,9 +1,7 @@
 package nat.loudj.duolingodictionary.ui.login
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -26,6 +24,8 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
+
+        setHasOptionsMenu(true)
 
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
@@ -89,6 +89,11 @@ class LoginFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun login(username: String, password: String) {

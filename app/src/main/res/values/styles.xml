@@ -15,6 +15,7 @@
         <item name="materialButtonStyle">@style/AppTheme.Button</item>
         <item name="shapeAppearanceSmallComponent">@style/AppTheme.SmallComponent</item>
         <item name="android:progressBarStyle">@style/AppTheme.Progressbar</item>
+        <item name="popupMenuBackground">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.AppBarStyle" parent="Widget.MaterialComponents.ActionBar.Primary">

@@ -1,7 +1,8 @@
 package nat.loudj.duolingodictionary
 
 import android.os.Bundle
-import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -22,21 +23,29 @@ class MainActivity : AppCompatActivity() {
             AppBarConfiguration(setOf(R.id.loginFragment, R.id.spokenLanguagesFragment))
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
 
-
         LoginRepository.user ?: goToLogin()
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-            LoginRepository.logout()
-            goToLogin()
-            return true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.menu_action_logout -> {
+            logout()
+            true
         }
-        return super.onKeyDown(keyCode, event)
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp()
+    override fun onSupportNavigateUp() = navController.navigateUp() || super.onSupportNavigateUp()
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun logout() {
+        LoginRepository.logout()
+        goToLogin()
     }
 
     private fun goToLogin() {
