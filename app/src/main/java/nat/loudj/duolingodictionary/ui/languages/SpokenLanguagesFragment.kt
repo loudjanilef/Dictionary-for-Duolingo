@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_spoken_languages.view.*
 import nat.loudj.duolingodictionary.R
 import nat.loudj.duolingodictionary.data.model.Language
 import nat.loudj.duolingodictionary.ui.languages.LanguagesRecyclerViewAdapter.OnLanguagesListInteractionListener
@@ -34,26 +34,28 @@ class SpokenLanguagesFragment : Fragment(), OnLanguagesListInteractionListener {
 
         spokenLanguagesViewModel.languagesList.observe(
             viewLifecycleOwner,
-            Observer { languagesRecyclerViewAdapter.setValues(it) }
+            Observer {
+                languagesRecyclerViewAdapter.setValues(it)
+                view.loader.visibility = View.GONE
+            }
         )
 
         // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                addItemDecoration(
-                    GridSpacingItemDecorator(
-                        16,
-                        resources.displayMetrics.density,
-                        columnCount
-                    )
+        with(view.languagesList) {
+            addItemDecoration(
+                GridSpacingItemDecorator(
+                    16,
+                    resources.displayMetrics.density,
+                    columnCount
                 )
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = languagesRecyclerViewAdapter
+            )
+            layoutManager = when {
+                columnCount <= 1 -> LinearLayoutManager(context)
+                else -> GridLayoutManager(context, columnCount)
             }
+            adapter = languagesRecyclerViewAdapter
         }
+
         return view
     }
 

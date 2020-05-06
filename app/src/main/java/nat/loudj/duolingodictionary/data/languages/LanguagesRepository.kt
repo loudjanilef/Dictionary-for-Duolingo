@@ -15,6 +15,8 @@ object LanguagesRepository {
 
             if (result is Result.Success)
                 spokenlanguages.value = result.data
+            else
+                spokenlanguages.value = emptyList()
         }
         return spokenlanguages
     }

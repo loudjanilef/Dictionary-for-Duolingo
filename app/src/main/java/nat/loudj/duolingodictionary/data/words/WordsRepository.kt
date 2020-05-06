@@ -25,6 +25,8 @@ object WordsRepository {
 
             if (result is Result.Success)
                 knownWords.value = result.data
+            else
+                knownWords.value = emptyList()
         }
         return knownWords
     }
