@@ -10,6 +10,7 @@
         android:name="nat.loudj.duolingodictionary.ui.words.KnownWordFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layoutAnimation="@anim/list_appear"
         android:paddingHorizontal="16dp"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"

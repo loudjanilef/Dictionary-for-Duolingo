@@ -37,6 +37,7 @@ class KnownWordsFragment : Fragment(), WordsRecyclerViewAdapter.OnWordsListInter
             viewLifecycleOwner,
             Observer {
                 wordsRecyclerViewAdapter.setValues(it)
+                view.wordsList.scheduleLayoutAnimation()
                 view.loader.visibility = View.GONE
             }
         )

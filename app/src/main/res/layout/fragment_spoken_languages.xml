@@ -10,6 +10,7 @@
         android:name="nat.loudj.duolingodictionary.ui.languages.SpokenLanguagesFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layoutAnimation="@anim/list_appear"
         android:padding="16dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"

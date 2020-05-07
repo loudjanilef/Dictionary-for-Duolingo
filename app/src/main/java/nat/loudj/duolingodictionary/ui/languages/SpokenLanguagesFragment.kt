@@ -36,6 +36,7 @@ class SpokenLanguagesFragment : Fragment(), OnLanguagesListInteractionListener {
             viewLifecycleOwner,
             Observer {
                 languagesRecyclerViewAdapter.setValues(it)
+                view.languagesList.scheduleLayoutAnimation()
                 view.loader.visibility = View.GONE
             }
         )
