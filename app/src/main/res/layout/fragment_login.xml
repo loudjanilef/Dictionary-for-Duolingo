@@ -17,12 +17,12 @@
         tools:context=".ui.login.LoginFragment">
 
         <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
             android:contentDescription="@string/app_icon"
-            android:src="@mipmap/ic_launcher_round"
+            android:src="@drawable/ic_owl"
             app:layout_constraintBottom_toTopOf="@+id/loginBlock"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
