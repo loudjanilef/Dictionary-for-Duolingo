@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DuolingoDictionary</string>
+    <string name="app_name">Dictionary for Duolingo</string>
 
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
