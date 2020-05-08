@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dictionnaire pour Duolingo</string>
+    <string name="prompt_username">Nom d\'utilisateur</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="action_sign_in">Connexion</string>
+    <string name="invalid_username">Nom d\'utilisateur invalide</string>
+    <string name="login_failed">Echec de connexion</string>
+    <string name="wrong_credentials">Indentifiants invalides</string>
+    <string name="app_icon">Icone de l\'application</string>
+    <string name="login_fragment_label">Connexion</string>
+    <string name="languages_fragment_label">Sélection de la langue</string>
+    <string name="logout_menu_action">Déconnexion</string>
+    <string name="disclaimer">Cette application n\'est pas l\'application Duolingo officielle.\nEn vous connectant ici, vous lui donnez acces à votre compte Duolingo.\nVos données ne seront pas partagées.\nCliquez ici pour plus d\'informations.</string>
+</resources>

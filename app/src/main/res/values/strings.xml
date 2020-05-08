@@ -4,7 +4,6 @@
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
-    <string name="action_sign_in_short">Sign in</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="login_failed">"Login failed"</string>
     <string name="wrong_credentials">Invalid username/password</string>
@@ -12,6 +11,6 @@
     <string name="login_fragment_label">Login</string>
     <string name="languages_fragment_label">Language Selection</string>
     <string name="logout_menu_action">Logout</string>
-    <string name="disclaimer">This app is not the official Duolingo app.\nBy signing in here, you give it access to your Duolingo account.\nYour data will not be shared with anyone.\nClick here for more information</string>
-    <string name="privacy_rules_url">https://duolingo-dictionary.landen.co/privacy-policy</string>
+    <string name="disclaimer">This app is not the official Duolingo app.\nBy signing in here, you give it access to your Duolingo account.\nYour data will not be shared with anyone.\nClick here for more information.</string>
+    <string name="privacy_rules_url" translatable="false">https://duolingo-dictionary.landen.co/privacy-policy</string>
 </resources>
