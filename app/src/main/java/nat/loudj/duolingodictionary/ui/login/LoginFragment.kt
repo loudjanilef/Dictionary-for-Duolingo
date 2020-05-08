@@ -1,5 +1,8 @@
 package nat.loudj.duolingodictionary.ui.login
 
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.EditorInfo
@@ -86,6 +89,14 @@ class LoginFragment : Fragment() {
 
         view.login.setOnClickListener {
             login(view.username.text.toString(), view.password.text.toString())
+        }
+
+        view.disclaimer.setOnClickListener {
+            val openURL =
+                if (Build.VERSION.SDK_INT >= 24) Intent(Intent.ACTION_QUICK_VIEW)
+                else Intent(Intent.ACTION_VIEW)
+            openURL.data = Uri.parse(resources.getString(R.string.privacy_rules_url))
+            startActivity(openURL)
         }
 
         return view
