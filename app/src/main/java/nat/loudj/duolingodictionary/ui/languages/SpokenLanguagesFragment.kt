@@ -35,6 +35,12 @@ class SpokenLanguagesFragment : Fragment(), OnLanguagesListInteractionListener {
         spokenLanguagesViewModel.languagesList.observe(
             viewLifecycleOwner,
             Observer {
+                // If we go only one language, navigate to this language
+                if (it.size == 1) {
+                    goToLanguage(it.first())
+                    return@Observer
+                }
+
                 languagesRecyclerViewAdapter.setValues(it)
                 view.languagesList.scheduleLayoutAnimation()
                 view.loader.visibility = View.GONE
@@ -60,11 +66,14 @@ class SpokenLanguagesFragment : Fragment(), OnLanguagesListInteractionListener {
         return view
     }
 
-    override fun onLanguageClick(item: Language) {
+    override fun onLanguageClick(item: Language) = goToLanguage(item)
+
+
+    private fun goToLanguage(language: Language) {
         val action =
             SpokenLanguagesFragmentDirections.actionSpokenLanguagesFragmentToKnownWordFragment(
-                item.id,
-                item.name
+                language.id,
+                language.name
             )
         findNavController().navigate(action)
     }
