@@ -23,9 +23,11 @@ object WordsRepository {
         GlobalScope.launch(Dispatchers.Main) {
             val result = WordsDataSource.getKnownWords(languageId)
 
-            if (result is Result.Success)
-                knownWords.value = result.data
-            else
+            if (result is Result.Success) {
+                val wordsWithPronunciations =
+                    WordPronunciationInflater.inflatePronunciation(result.data, languageId)
+                knownWords.value = wordsWithPronunciations
+            } else
                 knownWords.value = emptyList()
         }
         return knownWords
