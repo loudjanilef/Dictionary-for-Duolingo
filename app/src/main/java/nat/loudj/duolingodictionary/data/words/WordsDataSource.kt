@@ -6,6 +6,7 @@ import kotlinx.coroutines.withContext
 import nat.loudj.duolingodictionary.data.Result
 import nat.loudj.duolingodictionary.data.login.LoginRepository
 import nat.loudj.duolingodictionary.data.model.WordWithTranslations
+import nat.loudj.duolingodictionary.helpers.pmap
 import nat.loudj.duolingodictionary.web.WebRequestsManager
 import org.json.JSONObject
 import java.io.IOException
@@ -49,41 +50,48 @@ object WordsDataSource {
                 Pair(knownWords, learningLanguageId)
             }
 
-            val translationsRequest = WebRequestsManager.createGetRequest(
-                WebRequestsManager.DICTIONARY_URL,
-                "api",
-                "1",
-                "dictionary",
-                "hints",
-                languageId,
-                learningLanguageId,
-                params = listOf(
-                    Pair(
-                        "tokens",
-                        knownWords.joinToString(
-                            prefix = "[\"",
-                            separator = "\",\"",
-                            postfix = "\"]"
-                        )
-                    )
-                )
-            )
-            val translationsResponse = WebRequestsManager.execute(translationsRequest)
-            if (!translationsResponse.isSuccessful)
-                throw Error("Request for translations failed" + translationsResponse.code)
-
-            val knownWordsWithTranslations = withContext(Dispatchers.IO) {
-                val bodyString =
-                    translationsResponse.body?.string() ?: throw  Error("Nothing returned")
-                val bodyJson = JSONObject(bodyString)
-                adaptKnownWordsWithTranslations(bodyJson)
-            }
+            val knownWordsWithTranslations = knownWords.chunked(500)
+                .pmap { getTranslationForWords(it, languageId, learningLanguageId) }.flatten()
 
             Result.Success(knownWordsWithTranslations)
         } catch (e: Throwable) {
             Log.e(this::class.simpleName, e.message ?: "Error")
             Result.Error(IOException("Error retrieving languages", e))
         }
+    }
+
+    private suspend fun getTranslationForWords(
+        words: List<String>,
+        sourceLanguageId: String,
+        destLanguageId: String
+    ): List<WordWithTranslations> = withContext(Dispatchers.IO) {
+        val translationsRequest = WebRequestsManager.createGetRequest(
+            WebRequestsManager.DICTIONARY_URL,
+            "api",
+            "1",
+            "dictionary",
+            "hints",
+            sourceLanguageId,
+            destLanguageId,
+            params = listOf(
+                Pair(
+                    "tokens",
+                    words.joinToString(
+                        prefix = "[\"",
+                        separator = "\",\"",
+                        postfix = "\"]"
+                    )
+                )
+            )
+        )
+        val translationsResponse = WebRequestsManager.execute(translationsRequest)
+        if (!translationsResponse.isSuccessful)
+            throw Error("Request for translations failed" + translationsResponse.code)
+
+
+        val bodyString = translationsResponse.body?.string() ?: throw  Error("Nothing returned")
+        val bodyJson = JSONObject(bodyString)
+        adaptKnownWordsWithTranslations(bodyJson)
     }
 
     private fun adaptLearningLanguageKey(json: JSONObject): String = json.getString("ui_language")
