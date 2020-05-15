@@ -10,19 +10,40 @@
 
     <TextView
         android:id="@+id/foreignWord"
-        android:layout_marginBottom="6dp"
         android:layout_width="wrap_content"
-        android:fontFamily="@font/nunito_extrabold"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_extrabold"
         android:maxWidth="150dp"
         android:minWidth="110dp"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:text="internationales" />
+
+    <TextView
+        android:id="@+id/pronunciation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:maxWidth="150dp"
+        android:minWidth="110dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/foreignWord"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Wô" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="right"
+        app:constraint_referenced_ids="foreignWord,pronunciation" />
 
     <TextView
         android:id="@+id/translations"
@@ -33,7 +54,7 @@
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@id/foreignWord"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/foreignWord"
+        app:layout_constraintLeft_toRightOf="@id/barrier"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="internationaux, internationales" />

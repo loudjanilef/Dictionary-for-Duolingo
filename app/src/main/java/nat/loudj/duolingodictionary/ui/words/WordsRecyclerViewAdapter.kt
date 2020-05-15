@@ -25,7 +25,6 @@ class WordsRecyclerViewAdapter(
         mListener.onWordClick(item)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_word_with_translation, parent, false)
@@ -34,8 +33,12 @@ class WordsRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mIdView.text = item.word
-        holder.mContentView.text = item.translations.joinToString()
+        holder.foreignWord.text = item.word
+        holder.translations.text = item.translations.joinToString()
+        item.pronunciation?.let {
+            holder.pronunciation.text = it
+            holder.pronunciation.visibility = View.VISIBLE
+        }
 
         with(holder.mView) {
             tag = item
@@ -51,11 +54,12 @@ class WordsRecyclerViewAdapter(
     override fun getItemCount(): Int = mValues.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.foreignWord
-        val mContentView: TextView = mView.translations
+        val foreignWord: TextView = mView.foreignWord
+        val translations: TextView = mView.translations
+        val pronunciation: TextView = mView.pronunciation
 
         override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
+            return super.toString() + "${foreignWord.text} (${pronunciation.text}) : ${translations.text}"
         }
     }
 
