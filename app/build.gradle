@@ -67,5 +67,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     // Pinyin support
-    implementation "net.duguying.pinyin:pinyin:0.0.1"
+    implementation 'com.github.promeg:tinypinyin:2.0.3'
+    implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
 }

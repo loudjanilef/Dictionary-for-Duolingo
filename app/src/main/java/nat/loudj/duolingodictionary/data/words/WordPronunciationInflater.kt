@@ -1,10 +1,10 @@
 package nat.loudj.duolingodictionary.data.words
 
+import com.github.promeg.pinyinhelper.Pinyin
 import nat.loudj.duolingodictionary.data.model.WordWithTranslations
-import net.duguying.pinyin.Pinyin
+import java.util.*
 
 object WordPronunciationInflater {
-    private val pinyinTranslater = Pinyin()
 
     fun inflatePronunciation(
         words: List<WordWithTranslations>,
@@ -22,13 +22,15 @@ object WordPronunciationInflater {
     }
 
     private fun inflateChinesePronunciation(word: WordWithTranslations): WordWithTranslations {
-        val pronunciation = pinyinTranslater.translateWithSep(word.word).replace(',', ' ')
-        return if (pronunciation != word.word)
+        return try {
+            val pronunciation = Pinyin.toPinyin(word.word, " ").toLowerCase(Locale.getDefault())
             WordWithTranslations(
                 word.word,
                 word.translations,
                 pronunciation
             )
-        else word
+        } catch (error: Error) {
+            word
+        }
     }
 }
