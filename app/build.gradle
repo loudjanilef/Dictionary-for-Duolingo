@@ -36,21 +36,21 @@ android {
 }
 
 dependencies {
-    def nav_version = "2.3.0"
-    def coroutines_version = "1.3.7"
-    def okHTTP_version = "4.5.0"
+    def nav_version = "2.3.1"
+    def coroutines_version = "1.3.9-native-mt"
+    def okHTTP_version = "4.9.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // UI
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
@@ -68,5 +68,4 @@ dependencies {
 
     // Pinyin support
     implementation 'com.github.promeg:tinypinyin:2.0.3'
-    implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
 }
