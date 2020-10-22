@@ -9,21 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_word_with_translation.view.*
 import nat.loudj.duolingodictionary.R
 import nat.loudj.duolingodictionary.data.model.WordWithTranslations
-import nat.loudj.duolingodictionary.ui.words.WordsRecyclerViewAdapter.OnWordsListInteractionListener
 
 /**
- * [RecyclerView.Adapter] that can display a list of [WordWithTranslations] and makes a call to the
- * specified [OnWordsListInteractionListener] on element click.
+ * [RecyclerView.Adapter] that can display a list of [WordWithTranslations]
  */
-class WordsRecyclerViewAdapter(
-    private val mListener: OnWordsListInteractionListener
-) : RecyclerView.Adapter<WordsRecyclerViewAdapter.ViewHolder>() {
+class WordsRecyclerViewAdapter : RecyclerView.Adapter<WordsRecyclerViewAdapter.ViewHolder>() {
     private var mValues: List<WordWithTranslations> = emptyList()
-
-    private val mOnClickListener = View.OnClickListener { v ->
-        val item = v.tag as WordWithTranslations
-        mListener.onWordClick(item)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -42,7 +33,6 @@ class WordsRecyclerViewAdapter(
 
         with(holder.mView) {
             tag = item
-            setOnClickListener(mOnClickListener)
         }
     }
 
@@ -57,17 +47,5 @@ class WordsRecyclerViewAdapter(
         val foreignWord: TextView = mView.foreignWord
         val translations: TextView = mView.translations
         val pronunciation: TextView = mView.pronunciation
-
-        override fun toString(): String {
-            return super.toString() + "${foreignWord.text} (${pronunciation.text}) : ${translations.text}"
-        }
-    }
-
-    /**
-     * This interface must be implemented by all the elements that need to react on list element click
-     *
-     */
-    interface OnWordsListInteractionListener {
-        fun onWordClick(item: WordWithTranslations)
     }
 }

@@ -17,8 +17,8 @@ import nat.loudj.duolingodictionary.data.model.WordWithTranslations
 /**
  * A fragment representing the list of known words for a language
  */
-class KnownWordsFragment : Fragment(), WordsRecyclerViewAdapter.OnWordsListInteractionListener {
-    private val wordsRecyclerViewAdapter = WordsRecyclerViewAdapter(this)
+class KnownWordsFragment : Fragment() {
+    private val wordsRecyclerViewAdapter = WordsRecyclerViewAdapter()
     private lateinit var knownWordsViewModel: KnownWordsViewModel
 
     override fun onCreateView(
@@ -52,9 +52,4 @@ class KnownWordsFragment : Fragment(), WordsRecyclerViewAdapter.OnWordsListInter
 
         return view
     }
-
-    override fun onWordClick(item: WordWithTranslations) {
-        println(item)
-    }
-
 }
