@@ -13,6 +13,7 @@
         <item name="actionBarStyle">@style/AppTheme.AppBarStyle</item>
         <item name="textInputStyle">@style/AppTheme.TextInput</item>
         <item name="materialButtonStyle">@style/AppTheme.Button</item>
+        <item name="floatingActionButtonStyle">@style/AppTheme.FloatingActionButton</item>
         <item name="shapeAppearanceSmallComponent">@style/AppTheme.SmallComponent</item>
         <item name="android:progressBarStyle">@style/AppTheme.Progressbar</item>
         <item name="popupMenuBackground">@color/colorPrimary</item>
@@ -30,6 +31,10 @@
         <item name="elevation">0dp</item>
         <item name="backgroundTint">@color/button</item>
         <item name="android:textColor">@color/button_text</item>
+    </style>
+
+    <style name="AppTheme.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/button</item>
     </style>
 
     <style name="AppTheme.TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

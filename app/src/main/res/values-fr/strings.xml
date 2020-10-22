@@ -12,4 +12,5 @@
     <string name="languages_fragment_label">Sélection de la langue</string>
     <string name="logout_menu_action">Déconnexion</string>
     <string name="disclaimer">Cette application n\'est pas l\'application Duolingo officielle.\nEn vous connectant ici, vous lui donnez acces à votre compte Duolingo.\nVos données ne seront pas partagées.\nCliquez ici pour plus d\'informations.</string>
+    <string name="search">Recherche</string>
 </resources>

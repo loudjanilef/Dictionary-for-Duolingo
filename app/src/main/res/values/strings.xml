@@ -13,4 +13,5 @@
     <string name="logout_menu_action">Logout</string>
     <string name="disclaimer">This app is not the official Duolingo app.\nBy signing in here, you give it access to your Duolingo account.\nYour data will not be shared with anyone.\nClick here for more information.</string>
     <string name="privacy_rules_url" translatable="false">https://duolingo-dictionary.landen.co/privacy-policy</string>
+    <string name="search">Search</string>
 </resources>
