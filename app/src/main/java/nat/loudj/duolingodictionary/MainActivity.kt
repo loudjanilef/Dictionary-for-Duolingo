@@ -1,12 +1,10 @@
 package nat.loudj.duolingodictionary
 
-import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -14,6 +12,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import nat.loudj.duolingodictionary.data.login.LoginRepository
+import nat.loudj.duolingodictionary.helpers.hideKeyboard
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,8 +55,7 @@ class MainActivity : AppCompatActivity() {
                 view.getGlobalVisibleRect(outRect)
                 if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
                     view.clearFocus()
-                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
+                    hideKeyboard(this)
                 }
             }
         }
